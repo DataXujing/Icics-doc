@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to Icics’s documentation! &#8212; Icics 0.3.4 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-icics-s-documentation">
+<h1>Welcome to Icics&#8217;s documentation!<a class="headerlink" href="#welcome-to-icics-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="icics">
+<h1>icics<a class="headerlink" href="#icics" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://github.com/DataXujing/Icics"><img alt="https://img.shields.io/github/forks/badges/shields.svg?style=social&amp;label=Fork" src="https://img.shields.io/github/forks/badges/shields.svg?style=social&amp;label=Fork" /></a>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/Icics"><img alt="https://img.shields.io/badge/Pypi-pip-yellow.svg" src="https://img.shields.io/badge/Pypi-pip-yellow.svg" /></a>
+<a class="reference external image-reference" href="https://travis-ci.org/DataXujing/Icics"><img alt="https://travis-ci.org/DataXujing/Icics.svg?branch=master" src="https://travis-ci.org/DataXujing/Icics.svg?branch=master" /></a>
+<img alt="https://raw.githubusercontent.com/DataXujing/Icics/master/pic/logo.png" class="align-right" src="https://raw.githubusercontent.com/DataXujing/Icics/master/pic/logo.png" />
+<p>Xujing</p>
+<p>Inter Credit Intelligent classification system (icics).
+It is a python package to Inter-credit. You can use it to assign cases to your salasman.</p>
+</div>
+<div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Firstly simply describe the process of the algorithm:</p>
+<ol class="arabic simple">
+<li>First, define the target legal &#8216;preference&#8217; cases(eg. the law operates the case with a high recovery rate and considers the law &#8216;preference&#8217; in the case)</li>
+<li>The sequence of cases randomly disrupting which ready to be allocated (the operation mainly weakens the shortcomings of the use of the algorithm)</li>
+<li>The clustering algorithm is performed on the target legal &#8216;preference&#8217; case, which brings together the similar cases. And record the number of the centers of each cluster and the number of cases in each cluster</li>
+<li>The similarity between each case and target law is calculated for each case, and the case is assigned to a cluster of high similarity, and the similarity is recorded.</li>
+<li>The case similarity of each cluster sort, select $k.(N_i/N)$  with high similarity in each cluster as the object of the legal case to be allocated cases (where the $k$ said the case for the allocation of the legal distribution of cases of households, $N_i$ said the goal of forensic in each cluster &#8220;liking&#8221; the number of cases, $N$ said the goal of all legal history &#8220;liking&#8221; the number of products)</li>
+<li>Delete the object of law and the case assigned by the objective of the law, and carry out the assignment of the next target legal case.</li>
+</ol>
+<p>more details you can pip this package in your equipment, and there are much more information about icics.</p>
+</div>
+<div class="section" id="module-icics">
+<span id="api"></span><h1>API<a class="headerlink" href="#module-icics" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="icics.EuclidDis1">
+<code class="descclassname">icics.</code><code class="descname">EuclidDis1</code><span class="sig-paren">(</span><em>A</em>, <em>B</em><span class="sig-paren">)</span><a class="headerlink" href="#icics.EuclidDis1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description: A method to compute two matrix&#8217;s euclid distance.</p>
+<p>Usage：EuclidDis1(A,B)</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p>A: A matrix</p>
+<p>B: A matrix</p>
+</div></blockquote>
+<p>the method return a np.matrix object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="icics.acc_mean">
+<code class="descclassname">icics.</code><code class="descname">acc_mean</code><span class="sig-paren">(</span><em>dfold0</em>, <em>bhywy0</em>, <em>topn0</em>, <em>ncluster</em>, <em>n_folds=5</em>, <em>shuffle=True</em>, <em>random_state=33</em>, <em>shuffle_icic=0</em>, <em>epsilon=0.001</em>, <em>init='k-means++'</em>, <em>max_iter=1000</em>, <em>algorithm='auto'</em>, <em>path=0</em><span class="sig-paren">)</span><a class="headerlink" href="#icics.acc_mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description: The method which can training the icic model</p>
+<p>Usage：acc_mean(labely,dfold0,bhywy0,ncluster,n_folds=5,shuffle=True,......)</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p>labely:   the training dataset label.
+n_folds:  the CV params.
+shuffle:  the CV params.
+......</p>
+<p>more arguments find in the function of icic. You can use help(icic) or ?(icic) to get
+support.</p>
+</div></blockquote>
+<p>Require:</p>
+<blockquote>
+<div>from sklearn.cross_validation import StratifiedKFold</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="icics.icic">
+<code class="descclassname">icics.</code><code class="descname">icic</code><span class="sig-paren">(</span><em>dfold0</em>, <em>df0</em>, <em>topn0</em>, <em>bhywy0</em>, <em>ncluster</em>, <em>shuffle=0</em>, <em>epsilon=0.001</em>, <em>init='k-means++'</em>, <em>random_state=123</em>, <em>max_iter=1000</em>, <em>algorithm='auto'</em>, <em>path=0</em><span class="sig-paren">)</span><a class="headerlink" href="#icics.icic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description: The method which can assign cases to more than one salesmans.</p>
+<p>Usage：icic(dfold0,df0,shuffle=0,topn0,bhywy0,ncluster,...)</p>
+<p>Arguments:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>dfold0:      A DataFrame, the history case feature which ywys has option.</dt>
+<dd>dfold0 should incloud &#8216;ywy0&#8217; and &#8216;ajbh&#8217;and other features.</dd>
+<dt>df0:         A DataFrame, the new case feature which ready to assign.df0 should</dt>
+<dd>incloud &#8216;ajbh&#8217; and other features that the same as dfold0.</dd>
+</dl>
+<p>shuffle:     0 or 1, if 1,then random disorder of the order of df0 and bhywy0.</p>
+<dl class="docutils">
+<dt>topn0:       A DataFrame,inclouding two cols like: &#8216;ywy0&#8217; and &#8216;topn_ywy&#8217;,topn_ywy means </dt>
+<dd>how many cases should assign to this ywy0.</dd>
+<dt>bhywy0:      A DataFrame,inclouding two or one cols like: &#8216;ywy0&#8217; and &#8216;ajbh&#8217;, and you can </dt>
+<dd>not provide the &#8216;ajbh&#8217; some times.</dd>
+<dt>path:        0 or a string like &#8216;~/desktop/files.xlsx&#8217;,it is a Excel file you want to save,</dt>
+<dd>if path=0,means you do not need to save the assign result to you CP or disk.</dd>
+</dl>
+<p>more arguments find in the function of recomm. You can use help(recomm) or ?(recomm) to get
+support.</p>
+</div></blockquote>
+<p>Require:</p>
+<blockquote>
+<div><p>import numpy as np</p>
+<p>import pandas as pd</p>
+<p>from  sklearn.cluster import KMeans</p>
+<p>import random</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="icics.recomm">
+<code class="descclassname">icics.</code><code class="descname">recomm</code><span class="sig-paren">(</span><em>dfold</em>, <em>df</em>, <em>bh</em>, <em>ywy</em>, <em>topn</em>, <em>ncluster</em>, <em>epsilon=0.001</em>, <em>init='k-means++'</em>, <em>random_state=123</em>, <em>max_iter=1000</em>, <em>algorithm='auto'</em><span class="sig-paren">)</span><a class="headerlink" href="#icics.recomm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description: The method which can assign cases to a salesman.</p>
+<p>Usage：recomm(dfold,df,bh,ywy,topn,ncluster,epsilon=0.001)</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p>dfold:     A DataFrame, the history case feature which this ywy has option.</p>
+<p>df:        A DataFrame, the new case feature which ready to assign.</p>
+<p>bh:        A list, the new case&#8217;s id number which is one-to-one correspondence with df.</p>
+<p>ywy:       A string, the salesman&#8217;s id number.</p>
+<p>topn:      An int number, how many cases should assign to the salesman.</p>
+<p>ncluster:  An int number, how many class should cluster.</p>
+<p>epsilon:   A little real number which avoid algorithmic errors</p>
+<p>more arguments find in the function of KMeans.</p>
+</div></blockquote>
+<p>Require:</p>
+<blockquote>
+<div><p>import numpy as np</p>
+<p>import pandas as pd</p>
+<p>from  sklearn.cluster import KMeans</p>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="demo">
+<h1>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span>  <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">StratifiedKFold</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">icics</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1">#test the model</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">u&quot;C:/Users/Administrator.USER-20170417DX/Desktop/test1.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">dfold0</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+<span class="n">df0</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2000</span><span class="p">)]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;ywy0&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">topn0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;ywy0&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">dfold0</span><span class="o">.</span><span class="n">ywy0</span><span class="p">),</span><span class="s1">&#39;topn_ywy&#39;</span><span class="p">:</span>
+     <span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">60</span><span class="p">]})</span>
+
+<span class="n">bhywy0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;ywy0&#39;</span><span class="p">:</span><span class="n">dfold0</span><span class="o">.</span><span class="n">ywy0</span><span class="p">})</span>
+
+<span class="n">icic</span><span class="p">(</span><span class="n">dfold0</span><span class="p">,</span><span class="n">df0</span><span class="p">,</span><span class="n">topn0</span><span class="p">,</span><span class="n">bhywy0</span><span class="p">,</span><span class="n">ncluster</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">shuffle</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>then you can training the hyper-parameters use the method of acc_mean:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#train the model</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">u&quot;C:/Users/Administrator.USER-20170417DX/Desktop/test2.xlsx&quot;</span><span class="p">)</span>
+
+<span class="n">bhywy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;ywy0&#39;</span><span class="p">:</span><span class="n">train</span><span class="o">.</span><span class="n">ywy0</span><span class="p">})</span>
+<span class="n">topn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;ywy0&#39;</span><span class="p">:[</span><span class="s1">&#39;cc12&#39;</span><span class="p">,</span><span class="s1">&#39;cd17&#39;</span><span class="p">],</span><span class="s1">&#39;topn_ywy&#39;</span><span class="p">:[</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">]})</span>
+
+<span class="n">pre_mean</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">):</span>
+    <span class="n">means</span> <span class="o">=</span> <span class="n">acc_mean</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">bhywy</span><span class="p">,</span><span class="n">topn</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+    <span class="n">pre_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">means</span><span class="p">)</span>
+
+<span class="n">precies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;ncluster&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span><span class="s1">&#39;acc_mean&#39;</span> <span class="p">:</span> <span class="n">pre_mean</span><span class="p">})</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="s2">&quot;ticks&quot;</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;The acc_mean of the icics-model&#39;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">pointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;ncluster&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;acc_mean&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">precies</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Cluster&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mean of accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>the result like this:</p>
+<img alt="https://raw.githubusercontent.com/DataXujing/Icics/master/pic/test.png" src="https://raw.githubusercontent.com/DataXujing/Icics/master/pic/test.png" />
+</div>
+<div class="section" id="supports">
+<h1>Supports<a class="headerlink" href="#supports" title="Permalink to this headline">¶</a></h1>
+<p>Tested on Python 2.7, 3.5, 3.6</p>
+<ul class="simple">
+<li>pip install Icics</li>
+<li>Download: <a class="reference external" href="https://pypi.python.org/pypi/Icics">https://pypi.python.org/pypi/Icics</a></li>
+<li>Documentation: <a class="reference external" href="https://github.com/DataXujing/Icics">https://github.com/DataXujing/Icics</a></li>
+</ul>
+<p>you can log in Xujing&#8217;s home page: <a class="reference external" href="https://dataxujing.coding.me">https://dataxujing.coding.me</a> or <a class="reference external" href="https://dataxujing.github.io">https://dataxujing.github.io</a> to learn more.</p>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to Icics&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#icics">icics</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#module-icics">API</a></li>
+<li><a class="reference internal" href="#demo">Demo</a></li>
+<li><a class="reference internal" href="#supports">Supports</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, XuJing.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
